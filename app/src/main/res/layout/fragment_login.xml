@@ -70,6 +70,8 @@
                 android:fontFamily="@font/poppins_medium"
                 android:textColorHint="@color/primary_gray"
                 android:textColor="@color/white"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:hint="yourname@gmail.com"/>
         </LinearLayout>
 
@@ -92,13 +94,13 @@
                 android:layout_height="50dp"
                 android:paddingHorizontal="20dp"
                 android:background="@drawable/edittext_glass_background"
-                android:drawableStart="@drawable/ic_password"
+                android:drawableStart="@drawable/ic_pin"
                 android:drawablePadding="20dp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColorHint="@color/primary_gray"
                 android:textColor="@color/white"
                 android:gravity="center_vertical"
-                android:hint="******"
+                android:hint="password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"

@@ -1,14 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_background"
     tools:context=".ui.fragment.SignupFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/signup_objects"/>
+    <ImageView
+        android:id="@+id/imgVector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:src="@drawable/signup_illustration"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/blur_glass_background"
+        android:layout_below="@id/imgVector"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Started Free"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moniter your children"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/primary_gray"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:layout_marginBottom="20dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email Adress"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/primary_gray"
+                android:textSize="12sp"/>
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingHorizontal="20dp"
+                android:background="@drawable/edittext_glass_background"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColorHint="@color/primary_gray"
+                android:textColor="@color/white"
+                android:hint="yourname@gmail.com"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Name"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/primary_gray"
+                android:textSize="12sp"/>
+            <EditText
+                android:id="@+id/edtName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingHorizontal="20dp"
+                android:background="@drawable/edittext_glass_background"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColorHint="@color/primary_gray"
+                android:textColor="@color/white"
+                android:hint="@string/yourname"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/primary_gray"
+                android:textSize="12sp"/>
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingHorizontal="20dp"
+                android:background="@drawable/edittext_glass_background"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColorHint="@color/primary_gray"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:hint="******"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:drawableEnd="@drawable/ic_hide" />
+            
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
+                <RadioButton
+                    android:id="@+id/rdChild"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/white"
+                    android:checked="true"
+                    android:text="Children"/>
+                <RadioButton
+                    android:id="@+id/rdParent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/white"
+                    android:text="Parent"/>
+            </RadioGroup>
 
-</FrameLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Sign Up"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:background="@drawable/custom_btn_background"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <View
+                    android:id="@+id/dividerLeft"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/tvOr"/>
+
+                <TextView
+                    android:id="@+id/tvOr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:paddingHorizontal="8dp"
+                    android:text="@string/or"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+                <View
+                    android:id="@+id/dividerRight"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/tvOr"/>
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogin"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Login"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:background="@drawable/custom_btn_background"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

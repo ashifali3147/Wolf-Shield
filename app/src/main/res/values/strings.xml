@@ -2,4 +2,6 @@
     <string name="app_name">Wolf Shield</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="yourname">\@yourname</string>
+    <string name="or">Or</string>
 </resources>

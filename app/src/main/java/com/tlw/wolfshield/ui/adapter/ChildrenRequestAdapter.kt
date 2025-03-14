@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import com.tlw.wolfshield.data.model.ChildModel
 import com.tlw.wolfshield.databinding.CustomChildrenRequestLayBinding
 
@@ -35,6 +36,14 @@ class ChildrenRequestAdapter :
             tvName.text = child.name
             tvEmail.text = child.email
             btnApprove.isVisible = !child.approved
+
+            btnApprove.setOnClickListener {
+                FirebaseFirestore.getInstance().collection("users")
+                    .document(child.id).update("approved", true)
+                    .addOnSuccessListener {
+                        notifyItemChanged(position)
+                    }
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.tlw.wolfshield.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.tlw.wolfshield.databinding.ActivityMainBinding
 import com.tlw.wolfshield.event.LoginEvent
+import com.tlw.wolfshield.utils.Constant
+import com.tlw.wolfshield.utils.LocalData
 import com.tlw.wolfshield.viewmodel.LoginViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,6 +24,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        if (LocalData.getUserID().isNotEmpty()){
+            val intent = if (LocalData.getParentRole()) {
+                Intent(this, ParentDashboardActivity::class.java)
+            } else {
+                Intent(this, ChildDashboardActivity::class.java)
+            }
+            startActivity(intent)
+            finishAffinity()
+        }
         setContentView(binding.root)
 //        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
 //            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

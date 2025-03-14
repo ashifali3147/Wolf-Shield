@@ -1,7 +1,10 @@
 package com.tlw.wolfshield.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +12,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.tlw.wolfshield.R
 import com.tlw.wolfshield.databinding.ActivityParentDashboardBinding
 import com.tlw.wolfshield.ui.adapter.ChildrenRequestAdapter
+import com.tlw.wolfshield.utils.LocalData
 import com.tlw.wolfshield.viewmodel.ParentDashboardViewModel
 
 class ParentDashboardActivity : AppCompatActivity() {
@@ -22,6 +28,7 @@ class ParentDashboardActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityParentDashboardBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -61,5 +68,23 @@ class ParentDashboardActivity : AppCompatActivity() {
             }
         }
         snackBar.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.parent_toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_logout -> {
+                FirebaseAuth.getInstance().signOut()
+                LocalData.clearSharedPreferences()
+                startActivity(Intent(this, MainActivity::class.java))
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

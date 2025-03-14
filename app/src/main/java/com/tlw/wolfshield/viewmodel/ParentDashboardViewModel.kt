@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tlw.wolfshield.data.model.ChildModel
+import com.tlw.wolfshield.utils.LocalData
 
 class ParentDashboardViewModel : ViewModel() {
 
@@ -14,14 +14,13 @@ class ParentDashboardViewModel : ViewModel() {
     val children: LiveData<List<ChildModel>> get() = _children
 
     private val db = FirebaseFirestore.getInstance()
-    private val auth = FirebaseAuth.getInstance()
 
     init {
         fetchChildren()
     }
 
     private fun fetchChildren() {
-        val parentID = auth.currentUser?.uid ?: return
+        val parentID = LocalData.getUserID()
 
         db.collection("users").document(parentID)
             .collection("children").get()

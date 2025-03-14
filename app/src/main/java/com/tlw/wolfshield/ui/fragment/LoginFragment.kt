@@ -16,6 +16,8 @@ import com.tlw.wolfshield.databinding.FragmentLoginBinding
 import com.tlw.wolfshield.event.LoginEvent
 import com.tlw.wolfshield.ui.activity.ChildDashboardActivity
 import com.tlw.wolfshield.ui.activity.ParentDashboardActivity
+import com.tlw.wolfshield.utils.Constant
+import com.tlw.wolfshield.utils.LocalData
 import com.tlw.wolfshield.viewmodel.LoginViewModel
 
 
@@ -55,14 +57,16 @@ class LoginFragment : Fragment() {
                                 if(document.exists()) {
                                     val role = document.getString("role") ?: ""
                                     val approved = document.getBoolean("approved") ?: false
-                                    if (role == "child" && !approved) {
+                                    if (role == Constant.CHILD && !approved) {
                                         viewModel.sendUIEvent(LoginEvent.ShowSnackBar("Waiting for parent approval"))
                                     } else {
-                                        val intent = if (role == "parent") {
+                                        val intent = if (role == Constant.PARENT) {
                                             Intent(requireContext(), ParentDashboardActivity::class.java)
                                         } else {
                                             Intent(requireContext(), ChildDashboardActivity::class.java)
                                         }
+                                        LocalData.saveUserID(userId)
+                                        LocalData.saveParentRole(role == Constant.PARENT)
                                         startActivity(intent)
                                         requireActivity().finish()
                                     }

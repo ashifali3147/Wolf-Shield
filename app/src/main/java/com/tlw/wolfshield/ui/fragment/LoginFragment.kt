@@ -7,16 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tlw.wolfshield.R
 import com.tlw.wolfshield.databinding.FragmentLoginBinding
+import com.tlw.wolfshield.event.LoginEvent
+import com.tlw.wolfshield.viewmodel.LoginViewModel
 
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
+    private val viewModel: LoginViewModel by activityViewModels()
 
     private lateinit var auth: FirebaseAuth
     private val db = FirebaseFirestore.getInstance()
@@ -35,10 +39,12 @@ class LoginFragment : Fragment() {
             }
 
             btnLogin.setOnClickListener {
+                viewModel.sendUIEvent(LoginEvent.ShowLoader)
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
 
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    viewModel.sendUIEvent(LoginEvent.HideLoader)
                     if (task.isSuccessful) {
                         val userId = auth.currentUser?.uid ?: return@addOnCompleteListener
 
@@ -48,7 +54,7 @@ class LoginFragment : Fragment() {
                                     val role = document.getString("role") ?: ""
                                     val approved = document.getBoolean("approved") ?: false
                                     if (role == "child" && !approved) {
-                                        Toast.makeText(requireContext(), "Waiting for parent approval", Toast.LENGTH_SHORT).show()
+                                        viewModel.sendUIEvent(LoginEvent.ShowSnackBar("Waiting for parent approval"))
                                     } else {
                                         val intent = if (role == "parent") {
                                             Toast.makeText(requireContext(), "Parent", Toast.LENGTH_SHORT).show()
@@ -63,7 +69,7 @@ class LoginFragment : Fragment() {
                                 }
                             }
                     } else {
-                        Toast.makeText(requireContext(), "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        viewModel.sendUIEvent(LoginEvent.ShowSnackBar(task.exception?.message.toString()))
                     }
                 }
             }

@@ -70,6 +70,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:textColorHint="@color/primary_gray"
                 android:textColor="@color/white"
+                android:singleLine="true"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:hint="yourname@gmail.com"/>

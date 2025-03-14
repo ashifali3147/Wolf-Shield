@@ -14,6 +14,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.tlw.wolfshield.R
 import com.tlw.wolfshield.databinding.FragmentLoginBinding
 import com.tlw.wolfshield.event.LoginEvent
+import com.tlw.wolfshield.ui.activity.ChildDashboardActivity
+import com.tlw.wolfshield.ui.activity.ParentDashboardActivity
 import com.tlw.wolfshield.viewmodel.LoginViewModel
 
 
@@ -57,13 +59,11 @@ class LoginFragment : Fragment() {
                                         viewModel.sendUIEvent(LoginEvent.ShowSnackBar("Waiting for parent approval"))
                                     } else {
                                         val intent = if (role == "parent") {
-                                            Toast.makeText(requireContext(), "Parent", Toast.LENGTH_SHORT).show()
-//                                            Intent(this, ParentDashboardActivity::class.java)
+                                            Intent(requireContext(), ParentDashboardActivity::class.java)
                                         } else {
-                                            Toast.makeText(requireContext(), "Child", Toast.LENGTH_SHORT).show()
-//                                            Intent(this, ChildDashboardActivity::class.java)
+                                            Intent(requireContext(), ChildDashboardActivity::class.java)
                                         }
-//                                        startActivity(intent)
+                                        startActivity(intent)
                                         requireActivity().finish()
                                     }
                                 }
